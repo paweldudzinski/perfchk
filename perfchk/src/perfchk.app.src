@@ -1,5 +1,5 @@
 {application, perfchk,
- [{description, "An OTP application"},
+ [{description, "Test your site performance with SauceLabs"},
   {vsn, "0.1.0"},
   {registered, []},
   {mod, { perfchk_app, []}},

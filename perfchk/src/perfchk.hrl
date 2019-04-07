@@ -1,0 +1,2 @@
+-record(auth, {url, auth}).
+-record(sauce, {url, user, key}).

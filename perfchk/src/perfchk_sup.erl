@@ -14,6 +14,7 @@
 -export([init/1]).
 
 -define(SERVER, ?MODULE).
+-define(CHILD(M, F, P, T), {M, {M, F, P}, temporary, 2000, T, [M]}).
 
 %%====================================================================
 %% API functions
@@ -26,10 +27,10 @@ start_link() ->
 %% Supervisor callbacks
 %%====================================================================
 
-%% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-    {ok, { {one_for_all, 0, 1}, []} }.
-
-%%====================================================================
-%% Internal functions
-%%====================================================================
+    Runner = ?CHILD(runners_manager, start_link, [], worker),
+    RunnersSupervisor = ?CHILD(runners_sup, start_link, [], supervisor),
+    WebDriver = ?CHILD(webdriver, start_link, [], worker),
+    Strategy = {one_for_one, 5, 10},
+    Processes = [RunnersSupervisor, Runner, WebDriver],
+    {ok, {Strategy, lists:flatten(Processes)}}.
