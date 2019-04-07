@@ -7,8 +7,6 @@
          url/2,
          quit/1]).
 
--define(ONDEMAND, "https://ondemand.saucelabs.com/wd/hub").
-
 %% gen_server callbacks
 -export([init/1,
          handle_call/3,
@@ -16,6 +14,8 @@
          handle_info/2,
          terminate/2,
          code_change/3]).
+
+-include("perfchk.hrl").
 
 start_link() ->
     gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
@@ -35,18 +35,15 @@ init([]) ->
     {ok, undefined}.
 
 handle_call({start_session, BasicAuth}, _From, State) ->
-    {ok, Result} = post(?ONDEMAND ++ "/session", BasicAuth, desired_capabilities()),
+    {ok, Result} = requests:post(?ONDEMAND_SESSION, BasicAuth, desired_capabilities()),
     SessionId = proplists:get_value(<<"sessionId">>, Result),
     {reply, {ok, SessionId}, State};
 handle_call({url, SessionId, Url}, _From, State) ->
-    io:format("Handling url call with session: ~p and url: ~p~n", [SessionId, Url]),
-    WebDriverUrl = ?ONDEMAND ++ "/session/" ++ binary_to_list(SessionId) ++ "/url",
-    io:format("Webdriver url: ~p~n", [WebDriverUrl]),
-    {ok, _Result} = post(WebDriverUrl, [], {[{<<"url">>, list_to_binary(Url)}]}),
+    WebDriverUrl = ?ONDEMAND_URL(binary_to_list(SessionId)),
+    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, list_to_binary(Url)}]}),
     {reply, ok, State};
 handle_call({quit, SessionId}, _From, State) ->
-    io:format("Done session ~p~n", [SessionId]),
-    ok = delete(SessionId),
+    ok = requests:delete(SessionId),
     {reply, ok, State};
 handle_call(_Request, _From, State) ->
     {reply, ignored, State}.
@@ -72,18 +69,3 @@ desired_capabilities() ->
           {<<"version">>,<<"latest">>},
           {<<"extendedDebugging">>, true},
           {<<"name">>,<<"PerfChk SL Test">>}]}}]}.
-
-post(Url, BasicAuth, Opts) ->
-    {ok, {_, _, Body}} = httpc:request(post, {Url, BasicAuth, "application/json", jiffy:encode(Opts)}, [], []),
-    {BodyJson} = jiffy:decode(Body),
-    {ok, BodyJson}.
-
-delete(SessionId) ->
-    Url = ?ONDEMAND ++ "/session/" ++ binary_to_list(SessionId),
-    {ok, _Result} = httpc:request(delete, {Url, [], "application/json", []}, [], []),
-    ok.
-
-get(Url, SauceUser, SauceAccessKey) ->
-    Encoded = base64:encode_to_string(lists:append([SauceUser,":",SauceAccessKey])),
-    Auth = {"Authorization","Basic " ++ Encoded},
-    httpc:request(get, {Url, [Auth]}, [], []).
