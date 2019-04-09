@@ -11,10 +11,10 @@ post(Url, BasicAuth, Opts) ->
     {BodyJson} = jiffy:decode(Body),
     {ok, BodyJson}.
 
-delete(SessionId) ->
-    Url = ?ONDEMAND_QUIT(binary_to_list(SessionId)),
+delete(Url) ->
     {ok, _Result} = httpc:request(delete, {Url, [], "application/json", []}, [], []),
     ok.
 
 get(Url, BasicAuth) ->
-    httpc:request(get, {Url, BasicAuth}, [], []).
+    {ok, {_, _, Body}} = httpc:request(get, {Url, BasicAuth}, [], []),
+    {ok, jiffy:decode(Body)}.

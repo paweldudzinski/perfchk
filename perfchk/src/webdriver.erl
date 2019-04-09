@@ -3,7 +3,7 @@
 -behaviour(gen_server).
 
 -export([start_link/0,
-         start_session/1,
+         start_session/2,
          url/2,
          quit/1]).
 
@@ -20,11 +20,11 @@
 start_link() ->
     gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
 
-start_session(BasicAuth) ->
-    gen_server:call(?MODULE, {start_session, BasicAuth}, infinity).
+start_session(BasicAuth, TestName) ->
+    gen_server:call(?MODULE, {start_session, BasicAuth, TestName}, infinity).
 
-url(SessionId, Url) ->
-    gen_server:call(?MODULE, {url, SessionId, Url}, infinity).
+url(SessionId, NavigateToUrl) ->
+    gen_server:call(?MODULE, {url, SessionId, NavigateToUrl}, infinity).
 
 quit(SessionId) ->
     gen_server:call(?MODULE, {quit, SessionId}, infinity).
@@ -34,16 +34,18 @@ init([]) ->
     ssl:start(),
     {ok, undefined}.
 
-handle_call({start_session, BasicAuth}, _From, State) ->
-    {ok, Result} = requests:post(?ONDEMAND_SESSION, BasicAuth, desired_capabilities()),
+handle_call({start_session, BasicAuth, TestName}, _From, State) ->
+    WebDriverUrl = ?ONDEMAND_SESSION,
+    {ok, Result} = requests:post(WebDriverUrl, BasicAuth, desired_capabilities(TestName)),
     SessionId = proplists:get_value(<<"sessionId">>, Result),
     {reply, {ok, SessionId}, State};
-handle_call({url, SessionId, Url}, _From, State) ->
+handle_call({url, SessionId, NavigateToUrl}, _From, State) ->
     WebDriverUrl = ?ONDEMAND_URL(binary_to_list(SessionId)),
-    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, list_to_binary(Url)}]}),
+    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, list_to_binary(NavigateToUrl)}]}),
     {reply, ok, State};
 handle_call({quit, SessionId}, _From, State) ->
-    ok = requests:delete(SessionId),
+    WebDriverUrl = ?ONDEMAND_QUIT(SessionId),
+    ok = requests:delete(WebDriverUrl),
     {reply, ok, State};
 handle_call(_Request, _From, State) ->
     {reply, ignored, State}.
@@ -62,10 +64,10 @@ terminate(_Reason, _State) ->
 code_change(_OldVsn, State, _Extra) ->
     {ok, State}.
 
-desired_capabilities() ->
+desired_capabilities(TestName) ->
     {[{<<"desiredCapabilities">>,
         {[{<<"browserName">>,<<"chrome">>},
           {<<"platform">>,<<"Windows 10">>},
           {<<"version">>,<<"latest">>},
           {<<"extendedDebugging">>, true},
-          {<<"name">>,<<"PerfChk SL Test">>}]}}]}.
+          {<<"name">>,list_to_binary(TestName)}]}}]}.
