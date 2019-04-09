@@ -30,7 +30,6 @@ start_link() ->
 init([]) ->
     Runner = ?CHILD(runners_manager, start_link, [], worker),
     RunnersSupervisor = ?CHILD(runners_sup, start_link, [], supervisor),
-    WebDriver = ?CHILD(webdriver, start_link, [], worker),
     Strategy = {one_for_one, 5, 10},
-    Processes = [RunnersSupervisor, Runner, WebDriver],
+    Processes = [RunnersSupervisor, Runner],
     {ok, {Strategy, lists:flatten(Processes)}}.

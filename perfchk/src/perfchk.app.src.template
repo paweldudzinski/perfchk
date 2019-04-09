@@ -8,10 +8,10 @@
     stdlib
    ]},
   {env,[
-      {sauce_user, "pawel-sauce"},
-      {sauce_key, "e0a5bf63-8ec7-4914-906f-0e7edf870294"},
-      {url, "http://www.papaduda.pl"},
-      {test_name, "Erlang SL test from PerfChk"},
+      {sauce_user, ""},
+      {sauce_key, ""},
+      {url, ""},
+      {test_name, ""},
       {concurrent_tests, 1}
   ]},
   {modules, []},

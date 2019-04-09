@@ -7,9 +7,15 @@
          get/2]).
 
 post(Url, BasicAuth, Opts) ->
-    {ok, {_, _, Body}} = httpc:request(post, {Url, BasicAuth, "application/json", jiffy:encode(Opts)}, [], []),
-    {BodyJson} = jiffy:decode(Body),
-    {ok, BodyJson}.
+    case httpc:request(post, {Url, BasicAuth, "application/json", jiffy:encode(Opts)}, [], []) of
+        {ok, {{_, 401, "Unauthorized"}, _, _}} ->
+            {error, unauthorized};
+        {ok, {_, _, Body}} ->
+            {BodyJson} = jiffy:decode(Body),
+            {ok, BodyJson};
+        Any ->
+            io:format("Post response: ~p~n", [Any])
+    end.
 
 delete(Url) ->
     {ok, _Result} = httpc:request(delete, {Url, [], "application/json", []}, [], []),
