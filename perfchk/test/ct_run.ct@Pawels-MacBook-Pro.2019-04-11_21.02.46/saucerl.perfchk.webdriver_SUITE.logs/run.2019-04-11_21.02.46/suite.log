@@ -1,0 +1,60 @@
+=== Suite started at 2019-04-11 21:02:46
+=== Starting test, 1 test cases
+=cases         1
+=user          paweldudzinski
+=host          Pawels-MacBook-Pro
+=hosts         Pawels-MacBook-Pro 
+=emulator_vsn  10.2.3
+=emulator      beam
+=otp_release   21
+=started       2019-04-11 21:02:46
+=case          ct_framework:init_per_suite
+=logfile       ct_framework.init_per_suite.html
+=group_props   [{suite,webdriver_SUITE}]
+=started       2019-04-11 21:02:46
+=ended         2019-04-11 21:02:46
+=result        ok
+=elapsed       1.0e-6
+=case          webdriver_SUITE:t_desired_capabilities
+=logfile       webdriver_suite.t_desired_capabilities.html
+=started       2019-04-11 21:02:46
+=ended         2019-04-11 21:02:46
+=result        failed: {undef,
+                           [{webdriver,desired_capabilities,[],[]},
+                            {webdriver_SUITE,t_desired_capabilities,1,
+                                [{file,"webdriver_SUITE.erl"},{line,14}]},
+                            {test_server,ts_tc,3,
+                                [{file,"test_server.erl"},{line,1545}]},
+                            {test_server,run_test_case_eval1,6,
+                                [{file,"test_server.erl"},{line,1063}]},
+                            {test_server,run_test_case_eval,9,
+                                [{file,"test_server.erl"},{line,995}]}]}, [{webdriver,
+                                                                            desired_capabilities},
+                                                                           {webdriver_SUITE,
+                                                                            t_desired_capabilities,
+                                                                            14},
+                                                                           {test_server,
+                                                                            ts_tc,
+                                                                            1545},
+                                                                           {test_server,
+                                                                            run_test_case_eval1,
+                                                                            1063},
+                                                                           {test_server,
+                                                                            run_test_case_eval,
+                                                                            995}]
+=== *** FAILED test case 1 of 1 ***
+=case          ct_framework:end_per_suite
+=logfile       ct_framework.end_per_suite.html
+=group_props   [{suite,webdriver_SUITE}]
+=started       2019-04-11 21:02:46
+=ended         2019-04-11 21:02:46
+=result        ok
+=elapsed       0.0
+=group_time    0.068s
+=== TEST COMPLETE, 0 ok, 1 failed of 1 test cases
+
+=finished      2019-04-11 21:02:46
+=failed        1
+=successful    0
+=user_skipped  0
+=auto_skipped  0
