@@ -6,9 +6,9 @@
 
 -include("perfchk.hrl").
 
-start_session(BasicAuth, TestName) ->
+start_session(BasicAuthHeader, TestName) ->
     WebDriverUrl = ?ONDEMAND_SESSION,
-    case requests:post(WebDriverUrl, BasicAuth, desired_capabilities(TestName)) of
+    case requests:post(WebDriverUrl, BasicAuthHeader, desired_capabilities(TestName)) of
         {ok, Result} ->
             SessionId = proplists:get_value(<<"sessionId">>, Result),
             {ok, SessionId};

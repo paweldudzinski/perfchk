@@ -122,6 +122,6 @@
 			[$: | _] -> tl(Format);
 			_ -> Format
 		end,
-		?_print_colors) ++ "~n",
+		?_print_colors),
 		case Format of
 			[$, | _] -> tl(tl(tl(tl(tl(tl(tl(Args))))))); _ -> Args end)).

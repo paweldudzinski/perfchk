@@ -22,8 +22,8 @@
 start_link() ->
     supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
-start_child(Url, SauceUser, BasicAuth, TestName) ->
-    supervisor:start_child(?MODULE, [Url, SauceUser, BasicAuth, TestName]).
+start_child(Url, SauceUser, BasicAuthHeader, TestName) ->
+    supervisor:start_child(?MODULE, [Url, SauceUser, BasicAuthHeader, TestName]).
 
 %%====================================================================
 %% Supervisor callbacks
