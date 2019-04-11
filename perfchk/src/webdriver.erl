@@ -1,6 +1,7 @@
 -module(webdriver).
 
--export([start_session/2,
+-export([desired_capabilities/1,
+         start_session/2,
          url/2,
          quit/1]).
 
@@ -22,7 +23,7 @@ url(SessionId, NavigateToUrl) ->
     ok.
 
 quit(SessionId) ->
-    WebDriverUrl = ?ONDEMAND_QUIT(SessionId),
+    WebDriverUrl = ?ONDEMAND_QUIT(binary_to_list(SessionId)),
     ok = requests:delete(WebDriverUrl).
 
 desired_capabilities(TestName) ->

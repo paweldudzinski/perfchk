@@ -71,9 +71,9 @@ check_performance({ok, SessionId}, #auth{url=NavigateToUrl, auth=BasicAuthHeader
         noreply -> ok
     end;
 check_performance({error, unauthorized}, _State, _ResultHandleMode) ->
-    io:format("Error running performance test, please check your credentials");
+    ?print("Error running performance test, please check your credentials");
 check_performance({error, Reason}, _State, _ResultHandleMode) ->
-    io:format("Error running performance check with reason ~p~n", [Reason]).
+    ?print("Error running performance check with reason ~p~n", [Reason]).
 
 
 print_metrics(Result) ->
