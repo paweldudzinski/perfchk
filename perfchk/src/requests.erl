@@ -24,5 +24,13 @@ delete(Url) ->
     ok.
 
 get(Url, BasicAuthHeader) ->
-    {ok, {_, _, Body}} = httpc:request(get, {Url, ?HEADERS(BasicAuthHeader)}, [], []),
-    {ok, jiffy:decode(Body)}.
+    case httpc:request(get, {Url, ?HEADERS(BasicAuthHeader)}, [], []) of
+        {ok, {{_, 401, "Unauthorized"}, _, _}} ->
+            {error, unauthorized};
+        {ok, {{_, 404, "Not Found"}, _, _}} ->
+            {ok, {[]}};
+        {ok, {_, _, Body}} ->
+            {ok, jiffy:decode(Body)};
+        Any ->
+            Any
+    end.

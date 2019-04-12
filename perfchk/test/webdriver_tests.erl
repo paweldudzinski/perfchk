@@ -9,8 +9,7 @@ desired_capabilities_test() ->
     {Caps} = webdriver:desired_capabilities(?TEST_NAME),
     {Details} = proplists:get_value(<<"desiredCapabilities">>, Caps),
     true = proplists:get_value(<<"extendedDebugging">>, Details),
-    ExpectedTestName = list_to_binary(?TEST_NAME),
-    ExpectedTestName = proplists:get_value(<<"name">>, Details).
+    ?assertEqual(list_to_binary(?TEST_NAME) , proplists:get_value(<<"name">>, Details)).
 
 quit_test() ->
     ok = webdriver:quit(?SESSION_ID).
@@ -23,11 +22,12 @@ url_test() ->
     meck:unload(webdriver).
 
 start_session_unauthorized_test() ->
-    {error, unauthorized} = webdriver:start_session(?BASIC_AUTH_HEADER, ?TEST_NAME).
+    {error, Reason} = webdriver:start_session(?BASIC_AUTH_HEADER, ?TEST_NAME),
+    ?assertEqual(Reason, unauthorized).
 
 start_session_mocked_auth_test() ->
     meck:new(webdriver, [non_strict]),
     meck:expect(webdriver, start_session, fun(_Auth, _TestName) -> "SessionId" end),
-    "SessionId" = webdriver:start_session(?BASIC_AUTH_HEADER, ?TEST_NAME),
+    ?assertEqual("SessionId", webdriver:start_session(?BASIC_AUTH_HEADER, ?TEST_NAME)),
     meck:validate(webdriver),
     meck:unload(webdriver).
