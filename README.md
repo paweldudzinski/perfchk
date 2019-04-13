@@ -1,7 +1,7 @@
 Erlang PerfChk - website performance checker
 ============================================
 
-[![Build Status](https://travis-ci.org/paweldudzinski/perfchk.svg?branch=master)](https://travis-ci.org/lpaweldudzinski/perfchk)
+[![Build Status](https://travis-ci.com/paweldudzinski/perfchk.svg?branch=master)](https://travis-ci.com/paweldudzinski/perfchk)
 
 Check your website performance using your SauceLabs account and compare metrics with tests done in the past.
 * Setup with your SauceLabs username and access key
