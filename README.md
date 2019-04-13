@@ -12,20 +12,20 @@ Check your website performance using your SauceLabs account and compare metrics 
 * Set your test name
 * Run perfchk as a part of your CI/CD
 
-#Build
+Build
 
-##Edit `perfchk.app.src.template`, use your SauceLabs credentials and rename this file to `perfchk.app.src`
+Edit `perfchk.app.src.template`, use your SauceLabs credentials and rename this file to `perfchk.app.src`
 -----
 
     $ rebar3 compile
 
-#Run
+Run
 -----
 
     $ ./run.sh
 
 
-#Test
+Test
 -----
 
     $ rebar3 eunit
