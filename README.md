@@ -35,7 +35,7 @@ Test
 [erlang]: http://www.erlang.org
 [eunit stdout]: http://erlang.org/doc/apps/eunit/chapter.html#Running_EUnit
 [license]: ./LICENCE
-[release]: https://github.com/proper-testing/proper/releases/latest
+[release]: https://github.com/paweldudzinski/releases/latest
 
 <!-- Badges (alphabetically) -->
 [commit badge]: https://img.shields.io/github/last-commit/proper-testing/proper.svg?style=flat-square
