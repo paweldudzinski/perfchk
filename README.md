@@ -12,23 +12,39 @@ Check your website performance using your SauceLabs account and compare metrics 
 * Set your test name
 * Run perfchk as a part of your CI/CD
 
-Edit `perfchk.app.src.template`, use your SauceLabs credentials and rename this file to `perfchk.app.src`
+Before compiling edit `perfchk.app.src.template`, use your SauceLabs credentials and rename this file to `perfchk.app.src`
 
-Build
------
+### Build
+
     $ rebar3 compile
 
-Run
------
+### Run
 
     $ ./run.sh
 
 
-Test
------
+### Test
 
     $ rebar3 eunit
 
+
+
+
+### Output example
+
+```
+$ ./run.sh
+Starting remote session as papaduda
+Checking performance of http://www.papaduda.pl
+Parallel tests launched (5)....
+
+Page load       : 1296.0 ms
+Requests        : 11.0
+Page weight     : 219.444 KB
+Speed index     : 1155.4 ms
+
+Performance check: pass
+```
 
 <!-- Links (alphabetically) -->
 [commit]: https://github.com/paweldudzinski/perfchk/commit/HEAD
