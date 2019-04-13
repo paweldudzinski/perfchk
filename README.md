@@ -1,9 +1,26 @@
-perfchk
-=====
+Erlang PerfChk - website performance checker
+============================================
 
-An OTP application
+[![Build Status](https://travis-ci.org/paweldudzinski/perfchk.svg?branch=master)](https://travis-ci.org/lpaweldudzinski/perfchk)
+
+Check your website performance using your SauceLabs account and compare metrics with tests done in the past.
+* Setup with your SauceLabs username and access key
+* Set your test name
+* Run perfchk as a part of your CI/CD
 
 Build
 -----
 
+    Edit `perfchk.app.src.template`, use your SauceLabs credentials and rename this file to `perfchk.app.src`
     $ rebar3 compile
+
+Run
+-----
+
+    $ ./run.sh
+
+
+Test
+-----
+
+    $ rebar3 eunit
