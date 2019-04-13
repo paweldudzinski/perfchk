@@ -35,10 +35,10 @@ Test
 [erlang]: http://www.erlang.org
 [eunit stdout]: http://erlang.org/doc/apps/eunit/chapter.html#Running_EUnit
 [license]: ./LICENCE
-[release]: https://github.com/paweldudzinski/releases/latest
+[release]: https://github.com/paweldudzinski/perfchk/releases/latest
 
 <!-- Badges (alphabetically) -->
-[commit badge]: https://img.shields.io/github/last-commit/proper-testing/proper.svg?style=flat-square
+[commit badge]: https://img.shields.io/github/last-commit/paweldudzinski/perfchk.svg?style=flat-square
 [erlang versions badge]: https://img.shields.io/badge/erlang-20.0%20to%2021.3-blue.svg?style=flat-square
-[license badge]: https://img.shields.io/github/license/proper-testing/proper.svg?style=flat-square
-[release badge]: https://img.shields.io/github/release/proper-testing/proper.svg?style=flat-square
+[license badge]: https://img.shields.io/github/license/ppaweldudzinski/perfchk.svg?style=flat-square
+[release badge]: https://img.shields.io/github/release/paweldudzinski/perfchk.svg?style=flat-square
