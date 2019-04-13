@@ -53,6 +53,6 @@ Performance check: pass
 [release]: https://github.com/paweldudzinski/perfchk/releases/latest
 
 <!-- Badges (alphabetically) -->
-[commit badge]: https://img.shields.io/github/last-commit/paweldudzinski/perfchk.svg?style=flat-square
-[erlang versions badge]: https://img.shields.io/badge/erlang-18.0%20to%2021.3-orange.svg?style=flat-square
-[release badge]: https://img.shields.io/github/release/paweldudzinski/perfchk.svg?style=flat-square
+[commit badge]: https://img.shields.io/github/last-commit/paweldudzinski/perfchk.svg
+[erlang versions badge]: https://img.shields.io/badge/erlang-18.0%20to%2021.3-orange.svg
+[release badge]: https://img.shields.io/github/release/paweldudzinski/perfchk.svg
