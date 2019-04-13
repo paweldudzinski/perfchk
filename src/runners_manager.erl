@@ -21,8 +21,8 @@
 
 start_link() ->
     Url = application:get_env(perfchk, url, undefined),
-    SauceUser = application:get_env(perfchk, sauce_user, os:get_env_var(?SAUCE_USER_ENV)),
-    SauceAccessKey = application:get_env(perfchk, sauce_key, os:get_env_var(?SAUCE_ACCESS_KEY_ENV)),
+    SauceUser = application:get_env(perfchk, sauce_user, os:getenv(?SAUCE_USER_ENV)),
+    SauceAccessKey = application:get_env(perfchk, sauce_key, os:getenv(?SAUCE_ACCESS_KEY_ENV)),
     TestName = application:get_env(perfchk, test_name, "PerfChk SL Test"),
     ConcurrentTests = application:get_env(perfchk, concurrent_tests, ?CONCURRENT_TESTS),
     gen_server:start_link({local, ?MODULE}, ?MODULE, [Url, SauceUser, SauceAccessKey, TestName, ConcurrentTests], []).
