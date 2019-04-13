@@ -34,7 +34,7 @@ Test
 [commit]: https://github.com/paweldudzinski/perfchk/commit/HEAD
 [erlang]: http://www.erlang.org
 [eunit stdout]: http://erlang.org/doc/apps/eunit/chapter.html#Running_EUnit
-[license]: ./LICENCE
+[license]: ./LICENSE
 [release]: https://github.com/paweldudzinski/perfchk/releases/latest
 
 <!-- Badges (alphabetically) -->
