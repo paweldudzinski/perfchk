@@ -54,5 +54,5 @@ Performance check: pass
 
 <!-- Badges (alphabetically) -->
 [commit badge]: https://img.shields.io/github/last-commit/paweldudzinski/perfchk.svg?style=flat-square
-[erlang versions badge]: https://img.shields.io/badge/erlang-20.0%20to%2021.3-blue.svg?style=flat-square
+[erlang versions badge]: https://img.shields.io/badge/erlang-18.0%20to%2021.3-blue.svg?style=flat-square
 [release badge]: https://img.shields.io/github/release/paweldudzinski/perfchk.svg?style=flat-square
