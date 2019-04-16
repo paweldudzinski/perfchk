@@ -1,6 +1,6 @@
 {application, perfchk,
  [{description, "Test your site performance with SauceLabs"},
-  {vsn, "0.1.0"},
+  {vsn, "1.0"},
   {registered, []},
   {mod, { perfchk_app, []}},
   {applications,
