@@ -19,7 +19,7 @@ start_session(BasicAuthHeader, TestName) ->
 
 url(SessionId, NavigateToUrl) ->
     WebDriverUrl = ?ONDEMAND_URL(cast:list(SessionId)),
-    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, cast:list(NavigateToUrl)}]}),
+    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, cast:binary(NavigateToUrl)}]}),
     ok.
 
 quit(SessionId) ->
