@@ -13,7 +13,7 @@ get_job_not_found_test() ->
 get_job_test_mocked_resp_test() ->
     meck:new(sauce_api, [non_strict]),
     meck:expect(sauce_api, get_job, fun(_Auth, _SauceUser, _JobId) ->
-                                        {ok, [{<<"status">>, <<"complete">>}, {<<"id">>, <<"001">>}]}
+                                        {ok, [{<<"status">>, <<"complete">>}, {<<"id">>, <<"testjobid">>}]}
                                     end),
     {ok, Result} = sauce_api:get_job(?BASIC_AUTH_HEADER, ?SAUCE_USER, ?JOB_ID),
     ?assertEqual(proplists:get_value(<<"id">>, Result), <<"001">>),
