@@ -3,11 +3,7 @@
 
 -define(SAUCE_USER, "erlang-tester").
 -define(BASIC_AUTH_HEADER, {"Authorization", "Basic TOKEN"}).
--define(JOB_ID, "job001").
-
-get_job_not_found_test() ->
-    {ok, Result} = sauce_api:get_job(?BASIC_AUTH_HEADER, ?SAUCE_USER, ?JOB_ID),
-    ?assertEqual([], Result).
+-define(JOB_ID, "testjobid").
 
 get_job_test_mocked_resp_test() ->
     meck:new(sauce_api, [non_strict]),
