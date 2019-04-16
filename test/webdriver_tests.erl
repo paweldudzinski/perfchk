@@ -9,7 +9,7 @@ desired_capabilities_test() ->
     {Caps} = webdriver:desired_capabilities(?TEST_NAME),
     {Details} = proplists:get_value(<<"desiredCapabilities">>, Caps),
     true = proplists:get_value(<<"extendedDebugging">>, Details),
-    ?assertEqual(list_to_binary(?TEST_NAME) , proplists:get_value(<<"name">>, Details)).
+    ?assertEqual(cast:binary(?TEST_NAME) , proplists:get_value(<<"name">>, Details)).
 
 quit_test() ->
     ok = webdriver:quit(?SESSION_ID).

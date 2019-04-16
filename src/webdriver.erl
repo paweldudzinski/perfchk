@@ -18,12 +18,12 @@ start_session(BasicAuthHeader, TestName) ->
     end.
 
 url(SessionId, NavigateToUrl) ->
-    WebDriverUrl = ?ONDEMAND_URL(binary_to_list(SessionId)),
-    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, list_to_binary(NavigateToUrl)}]}),
+    WebDriverUrl = ?ONDEMAND_URL(cast:list(SessionId)),
+    {ok, _Result} = requests:post(WebDriverUrl, [], {[{<<"url">>, cast:list(NavigateToUrl)}]}),
     ok.
 
 quit(SessionId) ->
-    WebDriverUrl = ?ONDEMAND_QUIT(binary_to_list(SessionId)),
+    WebDriverUrl = ?ONDEMAND_QUIT(cast:list(SessionId)),
     ok = requests:delete(WebDriverUrl).
 
 desired_capabilities(TestName) ->
@@ -32,4 +32,4 @@ desired_capabilities(TestName) ->
           {<<"platform">>,<<"Windows 10">>},
           {<<"version">>,<<"latest">>},
           {<<"extendedDebugging">>, true},
-          {<<"name">>,list_to_binary(TestName)}]}}]}.
+          {<<"name">>,cast:binary(TestName)}]}}]}.

@@ -28,8 +28,6 @@ Before compiling edit `perfchk.app.src.template`, use your SauceLabs credentials
     $ rebar3 eunit
 
 
-
-
 ### Output example
 
 ```

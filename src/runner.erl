@@ -61,7 +61,7 @@ code_change(_OldVsn, State, _Extra) ->
 check_performance({ok, SessionId}, #auth{url=NavigateToUrl, auth=BasicAuthHeader, user=SauceUser}, ResultHandleMode) ->
     ok = webdriver:url(SessionId, NavigateToUrl),
     ok = webdriver:quit(SessionId),
-    JobId = binary_to_list(SessionId),
+    JobId = cast:list(SessionId),
     ok = wait_until_job_completed(BasicAuthHeader, SauceUser, JobId),
     {ok, Result} = sauce_api:get_metrics(BasicAuthHeader, JobId),
     case ResultHandleMode of
@@ -107,7 +107,7 @@ humanize_metric(<<"requestsCount">>, Value) ->
 humanize_metric(<<"pageWeight">>, Value) ->
     ["Page weight     :", Value/1000, " KB"];
 humanize_metric(<<"speedIndex">>, Value) ->
-    ["Speed index     :", list_to_float(float_to_list(Value,[{decimals, 2}])), " ms"];
+    ["Speed index     :", cast:float(cast:list(Value)), " ms"];
 humanize_metric(Other, Value) ->
     [Other, Value, ""].
 
@@ -120,7 +120,7 @@ humanize_metric_name(<<"pageWeight">>) ->
 humanize_metric_name(<<"speedIndex">>) ->
     "speed index";
 humanize_metric_name(MetricName) ->
-    binary_to_list(MetricName).
+    cast:list(MetricName).
 
 print_summary([]) ->
     ?print("~nPerformance check: $g~n~n", ["pass"]);

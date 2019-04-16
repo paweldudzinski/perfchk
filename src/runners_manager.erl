@@ -47,7 +47,7 @@ handle_cast(run, #sauce{url=Url, user=SauceUser, key=SauceAccessKey, test_name=T
             {ok, Processes} = start_concurrent_sessions(Url, SauceUser, BasicAuthHeader, TestName, ConcurrentTests),
             {ok, Pid} = start_check_session(Url, SauceUser, BasicAuthHeader, TestName),
             ?print("Checking performance of $dc~n", [Url]),
-            ?print("Parallel tests launched $dc$dc$dc...", ["(", integer_to_list(ConcurrentTests), ")"]),
+            ?print("Parallel tests launched $dc$dc$dc...", ["(", cast:list(ConcurrentTests), ")"]),
             quit_when_all_done([Pid|Processes])
     end,
     {noreply, State};
